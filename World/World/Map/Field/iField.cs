@@ -13,6 +13,9 @@ namespace World.Map.Field
          */
         public Vector2 mPosition = new Vector2(0, 0);
         public Vector2 mPositionZoom = new Vector2(0, 0);
+        public Vector2 vSize = new Vector2(100, 65);
+        public Vector2 vFix = new Vector2(0, 0);
+
         /**
          * Pozycja podczas wyswietlania na ekranie ("widok z kamery")
          */
@@ -23,7 +26,7 @@ namespace World.Map.Field
         public int X = 0;
         public int Y = 0;
 
-        bool passable = true;
+        public int Level = 0;
 
         public Texture2D mSpriteTexture;
 
@@ -69,10 +72,15 @@ namespace World.Map.Field
         public void updatePositionZoom(float Zoom)
         {
             //this.mPositionZoom.X = -this.X * (100 / (2 * Zoom)) + this.Y * (100 / (2 * Zoom));
-            this.mPositionZoom.X = (-this.X + this.Y) * (50 / Zoom);
+            this.mPositionZoom.X = (-this.X + this.Y) * ( (this.vSize.X/2) / Zoom);
 
             //this.mPositionZoom.Y = this.X * (64 / (2 * Zoom)) - (this.X * 7 / Zoom) + this.Y * ((100 / (2 * Zoom)) / 2);
-            this.mPositionZoom.Y = (25 / Zoom) * (this.X + this.Y);
+            // ((this.vSize.Y-15) / 2) = 25 dla standardowego
+            this.mPositionZoom.Y = ( 25 / Zoom) * (this.X + this.Y);
+
+            //this.mPositionZoom.Y += (60 - this.vSize.Y) / Zoom;
+            this.mPositionZoom.Y += (this.vFix.Y) / Zoom;
+            this.mPositionZoom.Y -= (this.Level * 15) / Zoom;
         }
 
         // Punkt ma swoje wspolrzedne
@@ -89,14 +97,14 @@ namespace World.Map.Field
         {
             this.updatePositionZoom(Zoom);
 
-            if (this.X % 3 == 1 && this.Y % 3 == 1)
+            /*if (this.X % 3 == 1 && this.Y % 3 == 1)
             {
                 this.mPositionZoom.Y -= 7 / Zoom;
-            }
+            }*/
 
             this.UpdatePositionByCamAndScreen(vCamera, Screen);
 
-            Rectangle DrawBox = new Rectangle((int)position.X, (int)position.Y, (int)(100 / Zoom), (int)(65 / Zoom));
+            Rectangle DrawBox = new Rectangle((int)position.X, (int)position.Y, (int)(this.vSize.X / Zoom), (int)(this.vSize.Y / Zoom));
 
             spriteBatch.Draw(this.mSpriteTexture, DrawBox, Color.White * alpha);
 

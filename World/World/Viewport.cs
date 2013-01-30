@@ -74,7 +74,7 @@ namespace World
             {
                 int t = Convert.ToInt32((this.WorldMap.yKubelek[yStart][0].mPosition.X - (crop.X * Zoom)) / this.FieldSize.X) + 1; // +1 Zapas na lewo od granicy
 
-                Console.WriteLine("{0}", t);
+                //Console.WriteLine("{0}", t);
 
                 int xStart = t - addRight;
                 if (xStart <= 0) xStart = 0;

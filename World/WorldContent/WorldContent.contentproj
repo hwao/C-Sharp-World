@@ -70,18 +70,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Field\Hill\hill.png">
+      <Name>hill</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Field\Hill\hillE.png">
       <Name>hillE</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Field\Hill\hillES.png">
-      <Name>hillES</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Field\Hill\hillN.png">
-      <Name>hillN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -92,6 +87,11 @@
     </Compile>
     <Compile Include="Field\Hill\hillNW.png">
       <Name>hillNW</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Field\Hill\hillS.png">
+      <Name>hillS</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -107,6 +107,13 @@
     </Compile>
     <Compile Include="Field\Hill\hillW.png">
       <Name>hillW</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Field\Hill\hillN.png">
+      <Name>hillN</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

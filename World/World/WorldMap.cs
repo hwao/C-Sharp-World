@@ -47,14 +47,50 @@ namespace World
                     pos.Y += h * ((100 / 2) / 2);
                     pos.X += h * (100/2);
 
-                    if (h % 2 == 0)
+                    if (h % 5 == 1 && w % 5 == 1)
                     {
-                        this.fieldList[w, h] = new World.Map.Field.Beach(this.Game);
+                        this.fieldList[w, h] = new World.Map.Field.Grass(this.Game);
+                        this.fieldList[w, h].Level = 1;
+                    }
+                    else if (h % 5 == 2 && w % 5 == 1)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillSE(this.Game);
+                    }
+                    else if (h % 5 == 1 && w % 5 == 2)
+                    {
+                        //this.fieldList[w, h] = new World.Map.Field.Hill.HillSW(this.Game);
+                        this.fieldList[w, h] = new World.Map.Field.Grass(this.Game);
+                    }
+                    else if (h % 5 == 0 && w % 5 == 2)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillW(this.Game);
+                    }
+                    else if (h % 5 == 2 && w % 5 == 2)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillS(this.Game);
+                    }
+                    else if (h % 5 == 0 && w % 5 == 0)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillN(this.Game);
+                    }
+                    else if (h % 5 == 0 && w % 5 == 1)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillNW(this.Game);
+                    }
+                    else if (h % 5 == 1 && w % 5 == 0)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillNE(this.Game);
+                    }
+                    else if (h % 5 == 2 && w % 5 == 0)
+                    {
+                        this.fieldList[w, h] = new World.Map.Field.Hill.HillE(this.Game);
                     }
                     else
                     {
                         this.fieldList[w, h] = new World.Map.Field.Grass(this.Game);
                     }
+
+                    
                     
                     this.fieldList[w, h].mPosition = pos;
                     this.fieldList[w, h].X = w;

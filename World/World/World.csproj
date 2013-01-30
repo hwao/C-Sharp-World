@@ -111,6 +111,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Map\Field\Beach.cs" />
+    <Compile Include="Map\Field\Hill.cs" />
+    <Compile Include="Map\Field\Hill\HillE.cs" />
+    <Compile Include="Map\Field\Hill\HillW.cs" />
+    <Compile Include="Map\Field\Hill\HillS.cs" />
+    <Compile Include="Map\Field\Hill\HillNW.cs" />
+    <Compile Include="Map\Field\Hill\HillNE.cs" />
+    <Compile Include="Map\Field\Hill\HillN.cs" />
+    <Compile Include="Map\Field\Hill\HillSW.cs" />
     <Compile Include="Map\Field\Hill\HillSE.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="V2dInt.cs" />

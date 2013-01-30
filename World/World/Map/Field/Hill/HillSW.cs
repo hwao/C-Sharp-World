@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace World.Map.Field.Hill
 {
-    class HillSE : World.Map.Field.Hill.Hill
+    class HillSW : World.Map.Field.Hill.Hill
     {
-        public HillSE(Game1 Game)
+        public HillSW(Game1 Game)
             : base(Game)
         {
 
