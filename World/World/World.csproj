@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Map\Field\Beach.cs" />
+    <Compile Include="Map\Field\Hill\HillSE.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="V2dInt.cs" />
     <Compile Include="Viewport.cs" />
