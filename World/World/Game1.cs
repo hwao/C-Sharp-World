@@ -92,7 +92,12 @@ namespace World
             base.Initialize();
 
 
-            Window.Title = string.Format("Mapa: {0} x {1} Okno: {2} x {3}", this.WorldMap.getWidth(), this.WorldMap.getHeight(), graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight );
+            this.UpdateTitle();
+        }
+
+        public void UpdateTitle()
+        {
+            Window.Title = string.Format("Mapa: {0} x {1} Okno: {2} x {3} Zoom: {4}", this.WorldMap.getWidth(), this.WorldMap.getHeight(), graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, Viewport[0].Zoom );
         }
 
         /// <summary>
@@ -153,10 +158,16 @@ namespace World
             if (keyState.IsKeyDown(Keys.S))
                 this.Viewport[0].Camera.Y += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            if (keyState.IsKeyDown(Keys.T) && !this.LastkeyState.IsKeyDown(Keys.T))
+            /*if (keyState.IsKeyDown(Keys.T) && !this.LastkeyState.IsKeyDown(Keys.T))
                 this.Viewport[0].Zoom *= 0.5f;
             if (keyState.IsKeyDown(Keys.G) && !this.LastkeyState.IsKeyDown(Keys.G))
                 this.Viewport[0].Zoom /= 0.5f;
+            */
+
+            if (keyState.IsKeyDown(Keys.T) && !this.LastkeyState.IsKeyDown(Keys.T))
+                this.Viewport[0].Zoom *= 2.5f;
+            if (keyState.IsKeyDown(Keys.G) && !this.LastkeyState.IsKeyDown(Keys.G))
+                this.Viewport[0].Zoom /= 2.5f;
 
 
             if (keyState.IsKeyDown(Keys.Left))
@@ -176,6 +187,8 @@ namespace World
             this.LastkeyState = keyState;
 
             // TODO: Add your update logic here
+
+            this.UpdateTitle();
 
             base.Update(gameTime);
         }
