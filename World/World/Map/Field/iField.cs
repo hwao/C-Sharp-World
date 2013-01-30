@@ -43,17 +43,17 @@ namespace World.Map.Field
 
         public iField[] adjacentFieldList;
 
-        public void bindAdjacentField( WorldMap WorldMap )
+        public void bindAdjacentField(WorldMap WorldMap)
         {
             this.adjacentFieldList = new iField[8];
-            this.adjacentFieldList[N]  = WorldMap.getField(X-1,Y-1);
-            this.adjacentFieldList[NE] = WorldMap.getField(X-1,Y);
-            this.adjacentFieldList[E]  = WorldMap.getField(X-1,Y+1);
-            this.adjacentFieldList[SE] = WorldMap.getField(X,Y+1);
-            this.adjacentFieldList[S]  = WorldMap.getField(X+1,Y+1);
-            this.adjacentFieldList[SW] = WorldMap.getField(X+1,Y);
-            this.adjacentFieldList[W]  = WorldMap.getField(X+1,Y-1);
-            this.adjacentFieldList[NW] = WorldMap.getField(X,Y-1);
+            this.adjacentFieldList[N] = WorldMap.getField(X - 1, Y - 1);
+            this.adjacentFieldList[NE] = WorldMap.getField(X - 1, Y);
+            this.adjacentFieldList[E] = WorldMap.getField(X - 1, Y + 1);
+            this.adjacentFieldList[SE] = WorldMap.getField(X, Y + 1);
+            this.adjacentFieldList[S] = WorldMap.getField(X + 1, Y + 1);
+            this.adjacentFieldList[SW] = WorldMap.getField(X + 1, Y);
+            this.adjacentFieldList[W] = WorldMap.getField(X + 1, Y - 1);
+            this.adjacentFieldList[NW] = WorldMap.getField(X, Y - 1);
         }
 
         public virtual void LoadContent(ContentManager Content)
@@ -61,30 +61,44 @@ namespace World.Map.Field
             this.mSpriteTexture = Content.Load<Texture2D>("grass");
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch, Vector2 vCamera, Rectangle Screen, float Zoom )
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 vCamera, Rectangle Screen, float Zoom)
         {
-            this.Draw(spriteBatch, vCamera, Screen, 1.0f, Zoom );
+            this.Draw(spriteBatch, vCamera, Screen, 1.0f, Zoom);
+        }
+
+        public void updatePositionZoom(float Zoom)
+        {
+            //this.mPositionZoom.X = -this.X * (100 / (2 * Zoom)) + this.Y * (100 / (2 * Zoom));
+            this.mPositionZoom.X = (-this.X + this.Y) * (50 / Zoom);
+
+            //this.mPositionZoom.Y = this.X * (64 / (2 * Zoom)) - (this.X * 7 / Zoom) + this.Y * ((100 / (2 * Zoom)) / 2);
+            this.mPositionZoom.Y = (25 / Zoom) * (this.X + this.Y);
+        }
+
+        // Punkt ma swoje wspolrzedne
+        // a narysowanie ich na ekranie zalezy od pozycji 0.0 dla Ekranu (ma rysowac od lewego gornego rogu ekranu
+        // w ktorym jest wyswietlany
+        // oraz od pozycji kamery ktora mozna przesuwac
+        public void UpdatePositionByCamAndScreen(Vector2 vCamera, Rectangle Screen)
+        {
+            position.X = this.mPositionZoom.X - vCamera.X + Screen.X;// +(this.X * (100 / Zoom));
+            position.Y = this.mPositionZoom.Y - vCamera.Y + Screen.Y; // -(this.Y * (50 / Zoom));
         }
 
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 vCamera, Rectangle Screen, float alpha, float Zoom)
         {
-            this.mPositionZoom.Y = this.X * (64 / (2 * Zoom)) - (this.X * 7 / Zoom);
-            this.mPositionZoom.X = -this.X * (100 / (2 * Zoom)); // -(w);
+            this.updatePositionZoom(Zoom);
 
-            this.mPositionZoom.Y += this.Y * ((100 / (2 * Zoom)) / 2);
-            this.mPositionZoom.X += this.Y * (100 / (2 * Zoom));
+            if (this.X % 3 == 1 && this.Y % 3 == 1)
+            {
+                this.mPositionZoom.Y -= 7 / Zoom;
+            }
 
-            // Punkt ma swoje wspolrzedne
-            // a narysowanie ich na ekranie zalezy od pozycji 0.0 dla Ekranu (ma rysowac od lewego gornego rogu ekranu
-            // w ktorym jest wyswietlany
-            // oraz od pozycji kamery ktora mozna przesuwac
-            position.X = this.mPositionZoom.X - vCamera.X + Screen.X;// +(this.X * (100 / Zoom));
-            position.Y = this.mPositionZoom.Y - vCamera.Y + Screen.Y; // -(this.Y * (50 / Zoom));
+            this.UpdatePositionByCamAndScreen(vCamera, Screen);
 
-            Rectangle DrawBox = new Rectangle((int)position.X, (int)position.Y, (int) (100 / Zoom), (int) (65 / Zoom) );
+            Rectangle DrawBox = new Rectangle((int)position.X, (int)position.Y, (int)(100 / Zoom), (int)(65 / Zoom));
 
             spriteBatch.Draw(this.mSpriteTexture, DrawBox, Color.White * alpha);
-            //spriteBatch.Draw(this.mSpriteTexture, position, Color.White);
 
             if (false)
             {
