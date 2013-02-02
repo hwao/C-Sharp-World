@@ -1,1 +1,0 @@
-D:\XNA\World\World\WorldContent\obj\x86\Debug\WorldContent.contentprojResolveAssemblyReference.cache
