@@ -27,6 +27,25 @@ namespace World
             }
         }
 
+        /// <summary>
+        ///  zwraca ona pole ktore znajduje się pod podanymi wspolrzednymi X,Y w tym viewporcie
+        /// </summary>
+        /// <param name="posX"></param>
+        /// <param name="posY"></param>
+        /// <returns></returns>
+        public World.Map.Field.iField getField(int posX, int posY)
+        {
+            posX += (int) this.Camera.X;
+            posY += (int)this.Camera.Y;
+
+            float findX = ((2 * posY - posX) / 2);
+            float findY = (posX + findX);
+            double fieldX = Math.Round((findX / (50 / this.Zoom) ));
+            double fieldY = Math.Round(findY / (50 / this.Zoom) ) - 1;
+            
+            return this.WorldMap.getField( (int)fieldX, (int)fieldY );
+        }
+
         public Viewport(WorldMap WorldMap, Rectangle Screen, Vector2 FieldSize, Vector2 Camera)
         {
             this.WorldMap = WorldMap;
