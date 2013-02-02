@@ -16,6 +16,8 @@ namespace World.Map.Field
         public Vector2 vSize = new Vector2(100, 65);
         public Vector2 vFix = new Vector2(0, 0);
 
+        public float alpha = 1.0f;
+
         /**
          * Pozycja podczas wyswietlania na ekranie ("widok z kamery")
          */
@@ -106,21 +108,16 @@ namespace World.Map.Field
 
             Rectangle DrawBox = new Rectangle((int)position.X, (int)position.Y, (int)(this.vSize.X / Zoom), (int)(this.vSize.Y / Zoom));
 
-            spriteBatch.Draw(this.mSpriteTexture, DrawBox, Color.White * alpha);
+            spriteBatch.Draw(this.mSpriteTexture, DrawBox, Color.White * this.alpha);
 
             if (false)
             {
                 spriteBatch.DrawString(this.Game._spr_font, string.Format("[{0},{1}]", X, Y),
                     new Vector2(position.X + (this.mSpriteTexture.Width / 2) - 25, position.Y + 10), Color.White);
 
-                spriteBatch.DrawString(this.Game._spr_font, string.Format("{0} {1}", mPosition.X, mPosition.Y),
-                   new Vector2(position.X + 20, position.Y + Game._spr_font.LineSpacing + 10), Color.White);
+                //spriteBatch.DrawString(this.Game._spr_font, string.Format("{0} {1}", mPosition.X, mPosition.Y),
+                //   new Vector2(position.X + 20, position.Y + Game._spr_font.LineSpacing + 10), Color.White);
             }
-        }
-
-        public virtual string ToString()
-        {
-            return "G";
         }
     }
 }
